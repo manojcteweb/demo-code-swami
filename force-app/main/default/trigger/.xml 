@@ -1,0 +1,39 @@
+thon
+class CreditCheckIntegration:
+    def __init__(self, credit_tool_api):
+        self.credit_tool_api = credit_tool_api
+
+    def retrieve_credit_info(self, applicant_id):
+        credit_score = self.credit_tool_api.get_credit_score(applicant_id)
+        financial_history = self.credit_tool_api.get_financial_history(applicant_id)
+        return credit_score, financial_history
+
+    def calculate_loan_offer(self, credit_score, financial_history):
+        # Simplified logic for demonstration
+        if credit_score > 750:
+            loan_amount = 50000
+            interest_rate = 3.5
+        elif credit_score > 650:
+            loan_amount = 30000
+            interest_rate = 5.0
+        else:
+            loan_amount = 10000
+            interest_rate = 7.5
+        return loan_amount, interest_rate
+
+    def pre_qualify_applicant(self, applicant_id):
+        credit_score, financial_history = self.retrieve_credit_info(applicant_id)
+        loan_amount, interest_rate = self.calculate_loan_offer(credit_score, financial_history)
+        self.store_applicant_data(applicant_id, credit_score, financial_history)
+        return loan_amount, interest_rate
+
+    def store_applicant_data(self, applicant_id, credit_score, financial_history):
+        # Placeholder for storing data
+        pass
+
+# Example usage
+credit_tool_api = None  # Replace with actual API client
+credit_check_system = CreditCheckIntegration(credit_tool_api)
+applicant_id = '12345'
+loan_amount, interest_rate = credit_check_system.pre_qualify_applicant(applicant_id)
+print(f"Pre-qualified Loan Amount: ${loan_amount}, Interest Rate: {interest_rate}%")
