@@ -1,4 +1,4 @@
-```python
+
 from flask import Flask, jsonify, request
 from datetime import datetime
 import random
@@ -46,4 +46,3 @@ def send_notification(app_id):
 
 if __name__ == '__main__':
     app.run(debug=True)
-```
